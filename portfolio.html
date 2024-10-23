@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        #formPage {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #7419fc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #7419fc;
+        }
+        .project {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .step {
+            display: none; /* Hide all steps initially */
+        }
+        .step.active {
+            display: block; /* Show only the active step */
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .step-indicator div {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            color: #555;
+            cursor: pointer;
+        }
+        .step-indicator div.active {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="formPage">
+        <h2>Create Your Portfolio</h2>
+        <div class="step-indicator">
+            <div class="step-number active" onclick="showStep(1)">Step 1</div>
+            <div class="step-number" onclick="showStep(2)">Step 2</div>
+            <div class="step-number" onclick="showStep(3)">Step 3</div>
+        </div>
+        
+        <div id="step1" class="step active">
+            <h3>Basic Information</h3>
+            <label for="userFirstName">First Name:</label>
+            <input type="text" id="userFirstName" required>
+
+            <label for="userName">Full Name:</label>
+            <input type="text" id="userName" required>
+
+            <label for="userTitle">Job Title:</label>
+            <input type="text" id="userTitle" required>
+
+            <label for="userSummary">Summary:</label>
+            <textarea id="userSummary" rows="3" required></textarea>
+
+            <label for="userProfileImage">Upload Profile Image:</label>
+            <input type="file" id="userProfileImage" accept="image/*" required>
+
+            <button type="button" onclick="showStep(2)">Next</button>
+        </div>
+
+        <div id="step2" class="step">
+            <h3>About Me</h3>
+            <label for="userAbout">About Me:</label>
+            <textarea id="userAbout" rows="4" required></textarea>
+
+            <button type="button" onclick="showStep(1)">Back</button>
+            <button type="button" onclick="showStep(3)">Next</button>
+        </div>
+
+        <div id="step3" class="step">
+            <h3>Projects</h3>
+            <div id="projectContainer">
+                <div class="project">
+                    <label for="projectTitle">Project Title:</label>
+                    <input type="text" class="projectTitle" required>
+
+                    <label for="projectDescription">Project Description:</label>
+                    <textarea class="projectDescription" rows="2" required></textarea>
+
+                    <label for="projectTechnologies">Technologies Used:</label>
+                    <input type="text" class="projectTechnologies" required>
+
+                    <hr>
+                </div>
+            </div>
+            <button type="button" onclick="addProject()">Add Another Project</button>
+            <button type="button" onclick="finishForm()">Finish Form</button>
+            <button type="button" onclick="showStep(2)">Back</button>
+        </div>
+    </div>
+
+    <script>
+        function showStep(step) {
+            const steps = document.querySelectorAll('.step');
+            const stepIndicators = document.querySelectorAll('.step-number');
+
+            steps.forEach((s, index) => {
+                s.classList.remove('active');
+                stepIndicators[index].classList.remove('active');
+            });
+
+            document.getElementById(`step${step}`).classList.add('active');
+            stepIndicators[step - 1].classList.add('active');
+        }
+
+        function addProject() {
+            const projectContainer = document.getElementById('projectContainer');
+            
+            // Create a new project div
+            const newProject = document.createElement('div');
+            newProject.classList.add('project');
+
+            // Create the project title input
+            const projectTitleLabel = document.createElement('label');
+            projectTitleLabel.textContent = 'Project Title:';
+            newProject.appendChild(projectTitleLabel);
+
+            const projectTitleInput = document.createElement('input');
+            projectTitleInput.type = 'text';
+            projectTitleInput.classList.add('projectTitle');
+            projectTitleInput.required = true;
+            newProject.appendChild(projectTitleInput);
+
+            // Create the project description textarea
+            const projectDescriptionLabel = document.createElement('label');
+            projectDescriptionLabel.textContent = 'Project Description:';
+            newProject.appendChild(projectDescriptionLabel);
+
+            const projectDescriptionTextarea = document.createElement('textarea');
+            projectDescriptionTextarea.classList.add('projectDescription');
+            projectDescriptionTextarea.rows = 2;
+            projectDescriptionTextarea.required = true;
+            newProject.appendChild(projectDescriptionTextarea);
+
+            // Create the technologies input
+            const projectTechnologiesLabel = document.createElement('label');
+            projectTechnologiesLabel.textContent = 'Technologies Used:';
+            newProject.appendChild(projectTechnologiesLabel);
+
+            const projectTechnologiesInput = document.createElement('input');
+            projectTechnologiesInput.type = 'text';
+            projectTechnologiesInput.classList.add('projectTechnologies');
+            projectTechnologiesInput.required = true;
+            newProject.appendChild(projectTechnologiesInput);
+
+            // Add a horizontal rule for separation between projects
+            const hr = document.createElement('hr');
+            newProject.appendChild(hr);
+
+            // Append the new project to the project container
+            projectContainer.appendChild(newProject);
+        }
+
+        function finishForm() {
+            const userFirstName = document.getElementById('userFirstName').value;
+            const userName = document.getElementById('userName').value;
+            const userTitle = document.getElementById('userTitle').value;
+            const userSummary = document.getElementById('userSummary').value;
+            const userAbout = document.getElementById('userAbout').value;
+
+            // Save the profile image file
+            const userProfileImage = document.getElementById('userProfileImage').files[0];
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                localStorage.setItem('userProfileImage', reader.result); // Save image as Base64
+            }
+            if (userProfileImage) {
+                reader.readAsDataURL(userProfileImage);
+            }
+
+            localStorage.setItem('userFirstName', userFirstName);
+            localStorage.setItem('userName', userName);
+            localStorage.setItem('userTitle', userTitle);
+            localStorage.setItem('userSummary', userSummary);
+            localStorage.setItem('userAbout', userAbout);
+
+            const projectTitles = document.getElementsByClassName('projectTitle');
+            const projectDescriptions = document.getElementsByClassName('projectDescription');
+            const projectTechnologies = document.getElementsByClassName('projectTechnologies');
+            const projects = [];
+
+            for (let i = 0; i < projectTitles.length; i++) {
+                if (projectTitles[i].value) {
+                    projects.push({
+                        title: projectTitles[i].value,
+                        description: projectDescriptions[i].value,
+                        technologies: projectTechnologies[i].value,
+                    });
+                }
+            }
+            localStorage.setItem('userProjects', JSON.stringify(projects));
+
+            // Redirect to display.htm
+            setTimeout(() => {
+                window.location.href = 'display.html';
+            }, 500); // Delay to ensure image saving
+        }
+    </script>
+</body>
+</html>

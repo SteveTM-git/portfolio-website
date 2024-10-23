@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Showcase your portfolio online with ease. Connect, inspire, and grow your professional reach.">
+  <meta name="keywords" content="portfolio, showcase, web development, projects, career, resume">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Website</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <style>
+    /* Additional styles for animations and button visibility */
+    .floating-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        padding: 15px 25px;
+        background-color: #7419fc;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        z-index: 1000;
+        display: block;
+    }
+
+    /* Animation for the hero image */
+    .hero-image img {
+        opacity: 0;
+        transform: translateY(-50px);
+        animation: fadeInUp 0.8s forwards;
+    }
+
+    /* Basic styling for the navbar */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .navbar .logo {
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .navbar .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+    }
+
+    .navbar .nav-links li {
+        display: inline-block;
+    }
+
+    .navbar .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Hover effect to create a rounded shape */
+    .navbar .nav-links a:hover {
+        background-color: #7419fc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transform: scale(1.05);
+    }
+
+    .navbar .nav-links a::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.4s ease;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    .navbar .nav-links a:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Styling for mobile responsiveness */
+    @media (max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+        }
+
+        .navbar .nav-links {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Scroll image animation */
+    .scroll-image {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: slideIn 0.5s forwards;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Section and card styling */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        text-align: center;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+    .card img {
+        width: 100px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Footer styling */
+    .footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .footer .social-icons {
+        margin-bottom: 15px;
+    }
+
+    .footer .social-icons a {
+        margin: 0 10px;
+        display: inline-block;
+    }
+
+    .footer .footer-links {
+        margin-bottom: 10px;
+    }
+
+    .footer .footer-links a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">PortPro</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-content">
+      <div class="hero-image">
+        <img src="abuu.png" alt="Hero Image">
+      </div>
+      <div class="hero-text">
+        <h1>Showcase Your Portfolio</h1>
+        <p>Easily create and manage your online portfolio. Share your work with the world.</p>
+        <button class="cta-btn" onclick="window.location.href='portfolio.html';">Get Started</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Second Section -->
+  <section class="scroll-section" id="about">
+    <div class="scroll-content">
+      <div class="scroll-image">
+        <img src="porto.png" alt="Scroll Image" style="width: 90%; height: auto;">
+      </div>
+      <div class="scroll-text">
+        <h2>Discover the Power of...</h2>
+        <p>Elevate your online presence and showcase your unique skills and achievements.</p>
+        <button class="cta-btn" onclick="window.location.href='portfolio.html';">Start Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customize Section -->
+  <section class="customize-section" id="portfolio">
+    <div class="container">
+      <h2 class="section-title">Customize Your Portfolio</h2>
+      <p class="section-subtitle">Personalize your portfolio with our easy-to-use tools...</p>
+      
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="card">
+          <img src="connect.png" alt="Connect">
+          <h3>Connect</h3>
+          <p>Network with Opportunities</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <img src="inspire.png" alt="Inspire">
+          <h3>Inspire</h3>
+          <p>Ignite Creativity and Influence Others.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <img src="grow.png" alt="Grow">
+          <h3>Grow</h3>
+          <p>Expand Your Professional Reach</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+          <img src="showcase.png" alt="Showcase">
+          <h3>Showcase</h3>
+          <p>Highlight Your Achievements</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="social-icons" id="contact">
+      <a href="#"><img src="facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="instagram.png" alt="Instagram"></a>
+      <a href="#"><img src="linkedin.png" alt="LinkedIn"></a>
+    </div>
+    <div class="footer-links">
+      <a href="#">Terms of Use</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="footer-copyright">
+      &copy; 2024 PortPro, Inc.
+    </div>
+  </footer>
+
+  <!-- Floating "Start Building" Button -->
+  <button id="startBuildingBtn" class="floating-btn" onclick="window.location.href='portfolio.html';">Start Building</button>
+
+  <!-- jQuery Scroll Animation -->
+  <script>
+    $(window).on('scroll', function () {
+      if ($(this).scrollTop() > 150) {
+        $('#startBuildingBtn').fadeIn();
+      } else {
+        $('#startBuildingBtn').fadeOut();
+      }
+    });
+  </script>
+</body>
+</html>

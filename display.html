@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Portfolio</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s; /* Smooth transition for color change */
+        }
+
+        nav a:hover {
+            color: #7419fc; /* Change color on hover */
+        }
+
+        section {
+            padding: 80px 30px;
+        }
+
+        #home {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px; /* Adjusted for fixed navbar */
+            padding: 100px 0; /* Extra padding for visual spacing */
+            background-color: #fff;
+        }
+
+        .intro {
+            max-width: 60%; /* Control width for left side */
+            color: inherit; /* Inherit color for the rest of the text */
+            margin-left: 10%; /* Adjusted left alignment */
+        }
+
+        .intro h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            opacity: 0; /* Start hidden for animation */
+            animation: fadeIn 2s forwards; /* Fade in animation */
+            animation-delay: 0.5s; /* Delay for name animation */
+        }
+
+        .intro h2 {
+            margin: 10px 0;
+        }
+
+        .intro p {
+            margin: 10px 0;
+        }
+
+        .profile-image {
+            width: 180px; /* Increased image width */
+            height: 180px; /* Increased image height */
+            border-radius: 50%; /* Make it circular */
+            margin-right: 10%; /* Space between image and text */
+            align-self: flex-start; /* Align image to the top of the container */
+        }
+
+        #about {
+            display: flex; /* Use flexbox for alignment */
+            background-color: black; /* Black background */
+            color: white; /* White text */
+            padding: 80px 30px;
+            margin-top: 60px; /* Adjust margin to prevent overlap with the navbar */
+            align-items: center; /* Center the content vertically */
+            justify-content: center; /* Center horizontally */
+        }
+
+        #about .about-content {
+            display: flex; /* Use flexbox for proper alignment */
+            align-items: center; /* Center align items vertically */
+            margin: 0 20px; /* Adjust for spacing */
+        }
+
+        #about h2, #about p {
+            color: white; /* Ensure text is white in About Me */
+            margin-left: 20px; /* Adjust for alignment */
+        }
+
+        #about .profile-image-about {
+            width: 180px; /* Image size for About Me */
+            height: 180px; /* Image size for About Me */
+            border-radius: 50%; /* Make it circular */
+            margin-right: 400px; /* Space between image and text */
+        }
+
+        #contact {
+            background-color: black; /* Change to black background */
+            color: white; /* Change text color to white */
+            padding: 80px 30px;
+        }
+
+        .hire-me {
+            margin-top: 20px;
+        }
+
+        .hire-me button {
+            padding: 10px 20px; /* Increased padding for better appearance */
+            background-color: #7419fc; /* Button color matching username */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px; /* Slightly larger font size */
+            transition: background-color 0.3s; /* Transition for hover effect */
+        }
+
+        .hire-me button:hover {
+            background-color: #580f9c; /* Darker shade on hover */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+        }
+
+        form input, form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white; /* White background for inputs */
+            color: black; /* Black text for inputs */
+        }
+
+        form input[type="text"], form input[type="email"] {
+            height: 30px; /* Smaller height for inputs */
+            font-size: 14px; /* Smaller font size for inputs */
+        }
+
+        form textarea {
+            height: 80px; /* Fixed height for the message textarea */
+            resize: none; /* Disable resizing of the textarea */
+            font-size: 14px; /* Match the font size of inputs */
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #7419fc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-name {
+            color: #7419fc; /* Specific color for user's name */
+        }
+
+        /* Notification message style */
+        .notification {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #7419fc; /* Color for notification */
+            color: white; /* Text color */
+            border-radius: 5px; /* Rounded corners */
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo" id="userFirstNameLogo">My Portfolio</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <div class="intro">
+            <h1 class="user-name">Hi</h1>
+            <h1>I'm <span id="userFullName"></span></h1>
+            <h2 id="userJobTitle"></h2>
+            <p id="userSummary"></p>
+            <div class="hire-me">
+                <button type="button" id="hireMeButton">Hire Me</button>
+                <div id="notification" class="notification">Thank you for your interest!</div> <!-- Notification Message -->
+            </div>
+        </div>
+        <img id="profileImage" class="profile-image" src="path/to/default/image.jpg" alt="Profile Image">
+    </section>
+
+    <section id="about">
+        <div class="about-content">
+            <img class="profile-image-about" id="aboutProfileImage" src="path/to/default/image.jpg" alt="Profile Image for About Me">
+            <div>
+                <h2>About Me</h2>
+                <p id="userAbout"></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div id="userProjects"></div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" required>
+            <label for="message">Your Message</label>
+            <textarea id="message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <script>
+        window.onload = function () {
+            // Load the stored user data from localStorage
+            const userName = localStorage.getItem('userName');
+            const userTitle = localStorage.getItem('userTitle');
+            const userSummary = localStorage.getItem('userSummary');
+            const userAbout = localStorage.getItem('userAbout');
+            const userProfileImage = localStorage.getItem('userProfileImage');
+            const userProjects = JSON.parse(localStorage.getItem('userProjects'));
+
+            // Set user details
+            document.getElementById('userFullName').innerText = userName || 'Your Name';
+            document.getElementById('userJobTitle').innerText = userTitle || 'Your Job Title';
+            document.getElementById('userSummary').innerText = userSummary || 'Brief summary about you.';
+            document.getElementById('userAbout').innerText = userAbout || 'About information...';
+
+            // Set user profile image
+            if (userProfileImage) {
+                document.getElementById('profileImage').src = userProfileImage;
+                document.getElementById('aboutProfileImage').src = userProfileImage;
+            }
+
+            // Display user projects
+            if (userProjects && userProjects.length > 0) {
+                const projectsContainer = document.getElementById('userProjects');
+                userProjects.forEach(project => {
+                    const projectElement = document.createElement('div');
+                    projectElement.innerHTML = `<h3>${project.title}</h3><p>${project.description}</p>`;
+                    projectsContainer.appendChild(projectElement);
+                });
+            }
+
+            // Update the logo with the user's first name
+            document.getElementById('userFirstNameLogo').innerText = userName ? userName.split(' ')[0] : 'Portfolio';
+
+            // Form submission handling
+            document.getElementById('contactForm').onsubmit = function(event) {
+                // Prevent the default form submission action
+                event.preventDefault();
+
+                // Display a message saying the message has been sent
+                alert('Message has been sent!');
+
+                // Optionally, clear the form fields after submission
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('subject').value = '';
+                document.getElementById('message').value = '';
+            };
+
+            // Hire Me button functionality
+            document.getElementById('hireMeButton').onclick = function() {
+                const notification = document.getElementById('notification');
+                notification.style.display = 'block'; // Show the notification
+                setTimeout(() => {
+                    notification.style.display = 'none'; // Hide the notification after 3 seconds
+                }, 3000);
+            };
+        };
+    </script>
+</body>
+</html>

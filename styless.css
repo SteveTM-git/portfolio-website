@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav .logo {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+section {
+    padding: 80px 30px;
+}
+
+#home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px; /* Adjusted for fixed navbar */
+    padding: 100px 0; /* Extra padding for visual spacing */
+    background-color: #fff;
+}
+
+.intro {
+    display: flex;
+    align-items: center;
+}
+
+.intro-text {
+    max-width: 600px;
+}
+
+.intro-text h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.intro-text h2 {
+    font-size: 24px;
+    color: #555;
+}
+
+.intro-text p {
+    margin-top: 10px;
+}
+
+.intro-image img {
+    width: 300px; /* Adjust the size as necessary */
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+#about, #projects {
+    background-color: white;
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.project {
+    margin: 20px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-bottom: 5px;
+}
+
+form input, form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
